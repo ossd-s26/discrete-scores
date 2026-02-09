@@ -28,7 +28,7 @@ This is the README for the repository.
 
 ## Contributing
 
-Before contributing to this project, please read our [contributing guidelines](https://github.com/sohamb117/ossd-ext/blob/main/CONTRIBUTING.md).
+Before contributing to this project, please read our [contributing guidelines](https://github.com/sohamb117/ossd-ext?tab=contributing-ov-file).
 
 ## Code of Conduct
 
