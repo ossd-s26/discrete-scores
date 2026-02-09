@@ -1,6 +1,6 @@
 # Gradescope Privacy Extension for Firefox
 
-This is the README for the repository.
+This extension aims to add small functionalities to Gradescope. Users will be able to hide grades, enable animations to celebrate good scores, and potentially more.
 
 ## Getting Started
 
