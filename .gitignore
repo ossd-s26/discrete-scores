@@ -1,0 +1,36 @@
+# Firefox extension build artifacts
+*.xpi
+*.zip
+web-ext-artifacts/
+
+# Development and testing
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS files
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Environment and config
+.env
+.env.local
+
+# Logs
+logs/
+*.log
