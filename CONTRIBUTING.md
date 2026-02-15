@@ -9,16 +9,16 @@ The documentation for getting started is very short. You can find it in the [REA
 ## To Make a Contribution
 
 1. Begin by [making an issue](https://github.com/ossd-s26/discrete-scores/issues). Please use the issue template closest to your contribution:
-	1.1 Feature Request
-	1.2 Bug Report
-	1.3 Task
+   * Feature Request
+   * Bug Report
+   * Task
 2. Fork the repository.
 3. Clone your fork.
 4. Create a branch with a descriptive name.
 5. Make your changes on that branch on your fork and push them to remote.
 6. Create a pull request on the main repository. 
-	6.1 Provide as much detail as possible.
-	6.2 All pull requests must include `Closes #X`, `X` being the number of the issue you created in Step 1. You can find the numberto the right of the issue title when on the issue page. This automatically closes the issue when your contribution is merged in.
+   * Provide as much detail as possible.
+   * All pull requests must include `Closes #X`, where `X` is the issue number from Step 1.
 7. Wait for a review and feedback.
 
 Once your work is merged, feel free to delete your fork.
