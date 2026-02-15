@@ -1,0 +1,13 @@
+name: Task
+description: Track a specific piece of work/to-do item.
+title: "[TO-DO] "
+labels: ["task"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: "Overview"
+      description: "What is the end goal of this task?"
+      placeholder: "e.g., Modify popup to display ..."
+    validations:
+      required: true
