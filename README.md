@@ -26,8 +26,8 @@ You're good to go! Feel free to pin the extension to your Toolbar and configure 
 
 ## Contributing
 
-Before contributing to this project, please read our [contributing guidelines](https://github.com/ossd-s26/discrete-scores.git?tab=contributing-ov-file).
+To contribute to this project, please read our [contributing guidelines](https://github.com/ossd-s26/discrete-scores.git?tab=contributing-ov-file).
 
 ## Code of Conduct
 
-[...]
+All contributors and community members must follow [our code of conduct](https://github.com/ossd-s26/discrete-scores/tree/updating-md?tab=coc-ov-file).
