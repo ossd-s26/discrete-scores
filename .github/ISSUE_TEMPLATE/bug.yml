@@ -1,0 +1,45 @@
+name: Bug Report
+description: Report a bug or issue.
+title: "[BUG] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Bug Description"
+      description: "A clear and concise description of what the bug is"
+      placeholder: "When I click ..., the extension ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "Steps to Reproduce"
+      description: "How can we reproduce this issue?"
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: input
+    id: version-info
+    attributes:
+      label: "Version Info"
+      description: "What version of Firefox and the extension are you using?"
+      placeholder: "Firefox XXX.X, Extension Version X.X"
+    validations:
+      required: false
+
+  - type: textarea
+    id: console
+    attributes:
+      label: "Console Errors"
+      description: "Are there error messages in the browser console?"
+      placeholder: "Paste any here"
+      render: shell
+    validations:
+      required: false
