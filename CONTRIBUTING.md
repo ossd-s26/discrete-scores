@@ -4,7 +4,7 @@ Hello! Thank you for your interest in this project! We appreciate every contribu
 
 ## Getting Started
 
-The documentation for getting started is very short. You can find it in the [README.md]().
+The documentation for getting started is very short. You can find it in the [README.md](https://github.com/ossd-s26/discrete-scores?tab=readme-ov-file).
 
 ## To Make a Contribution
 
