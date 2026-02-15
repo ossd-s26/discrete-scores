@@ -30,4 +30,4 @@ To contribute to this project, please read our [contributing guidelines](https:/
 
 ## Code of Conduct
 
-All contributors and community members must follow [our code of conduct](https://github.com/ossd-s26/discrete-scores/tree/updating-md?tab=coc-ov-file).
+All contributors and community members must follow our [code of conduct](https://github.com/ossd-s26/discrete-scores/tree/updating-md?tab=coc-ov-file).
