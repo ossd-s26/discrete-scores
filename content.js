@@ -5,7 +5,8 @@
 	let settings = {
 		enabled: true,
 		mode: 'always', // always, threshold
-		threshold: 70
+		threshold: 70,
+		apparent:true
 	};
 
 	// Load settings
@@ -106,6 +107,14 @@
 		if (url.match(/\/courses\/\d+$/)) {
 			const scoreElements = document.querySelectorAll('.submissionStatus--score');
 			scoreElements.forEach(el => processScoreElement(el));
+			if (settings.apparent) {
+	            const warns = document.querySelectorAll(`
+	                .submissionStatus-warning .submissionStatus--text, 
+	                .submissionTimeChart-warning .submissionTimeChart--timeRemaining
+	            `);
+
+	            warns.forEach(elem => {elem.style.textShadow = "0 0 5px #ff8c00, 0 0 10px #ff8c00"});
+        	}
 		}
 	}
 
