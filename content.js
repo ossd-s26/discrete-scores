@@ -5,7 +5,8 @@
 	let settings = {
 		enabled: true,
 		mode: 'always', // always, threshold
-		threshold: 70
+		threshold: 70,
+		apparent:true
 	};
 
 	// Load settings
@@ -106,6 +107,11 @@
 		if (url.match(/\/courses\/\d+$/)) {
 			const scoreElements = document.querySelectorAll('.submissionStatus--score');
 			scoreElements.forEach(el => processScoreElement(el));
+			if (settings.apparent){
+				//const warns = document.querySelectorAll(".submissionStatus") //for debug,as i dont have any unsubmitted assignments lol
+				const warns = document.querySelectorAll(".submissionStatus-warning") 
+				warns.forEach(elem => elem.style.backgroundColor = "coral") 
+			}
 		}
 	}
 
