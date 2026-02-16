@@ -109,8 +109,8 @@
 			scoreElements.forEach(el => processScoreElement(el));
 			if (settings.apparent){
 				//const warns = document.querySelectorAll(".submissionStatus") //for debug,as i dont have any unsubmitted assignments lol
-				const warns = document.querySelectorAll(".submissionStatus-warning") 
-				warns.forEach(elem => elem.style.backgroundColor = "coral") 
+				const warns = document.querySelectorAll(".submissionStatus-warning .submissionStatus--text")
+				warns.forEach(elem => {elem.style.textShadow = "0 0 5px #ff8c00, 0 0 10px #ff8c00"});
 			}
 		}
 	}
