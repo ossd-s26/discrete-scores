@@ -22,7 +22,7 @@
 		mode: 'always',
 		threshold: 70,
 		apparent: true,
-		cumulative: true
+		cumulative: false
 	};
 
   	// Load settings
