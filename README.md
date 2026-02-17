@@ -1,8 +1,13 @@
 # Gradescope Privacy Extension for Firefox
 
-This extension aims to add small privacy functionality to Gradescope.
+This extension adds a number of privacy and quality-of-life features to Gradescope.
 
-## Getting Started
+Here's some highlights:
+- Hidden scores by default
+- Show cumulative score in class
+- Mark/highlight incomplete and upcoming assignments
+- Drop assignment scores for calculations and predictions
+- Edit scores for calculations and predictions
 
 ### Requirements
 
