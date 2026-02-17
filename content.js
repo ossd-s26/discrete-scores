@@ -56,6 +56,69 @@
 		return button;
 	}
 
+	// Create drop score button
+	function createDropButton() {
+		const button = document.createElement('button');
+		button.className = 'gs-discrete-drop-button';
+		button.title = 'Drop this score from the total';
+		button.textContent = '×';
+		return button;
+	}
+
+	// Recalculate totals
+	function recalculateTotals() {
+		const scoreElements = document.querySelectorAll('.submissionStatus--score');
+		let totalEarned = 0;
+		let totalPossible = 0;
+
+		scoreElements.forEach(scoreElement => {
+			const wrapper = scoreElement.querySelector('.gs-discrete-overlay');
+			let scoreText;
+			let isDropped = false;
+
+			if (wrapper) {
+				isDropped = wrapper.getAttribute('data-gs-discrete-dropped') === 'true';
+				const scoreDisplay = wrapper.querySelector('.gs-discrete-score-value');
+				if (scoreDisplay) {
+					scoreText = scoreDisplay.textContent.trim();
+				}
+			} else {
+				scoreText = scoreElement.textContent.trim();
+			}
+
+			if (isDropped || !scoreText || scoreText.match(/^-\s*\/\s*\d/)) {
+				return;
+			}
+
+			const scoreInfo = parseScore(scoreText);
+			if (scoreInfo && scoreInfo.total > 0) {
+				totalEarned += scoreInfo.earned;
+				totalPossible += scoreInfo.total;
+			}
+		});
+
+		let cumulativeGradeContainer = document.querySelector('.gs-cumulative-grade');
+		if (settings.cumulative && totalPossible > 0) {
+			const cumulativePercentage = (totalEarned / totalPossible) * 100;
+			const cumulativeText = `Cumulative Grade: <span>${cumulativePercentage.toFixed(2)}%</span> (${totalEarned.toFixed(2)} / ${totalPossible.toFixed(2)})`;
+
+			if (!cumulativeGradeContainer) {
+				const contentWrapper = document.querySelector('.l-content');
+				if (contentWrapper) {
+					cumulativeGradeContainer = document.createElement('div');
+					cumulativeGradeContainer.className = 'gs-cumulative-grade';
+					contentWrapper.appendChild(cumulativeGradeContainer);
+				}
+			}
+			if (cumulativeGradeContainer) {
+				cumulativeGradeContainer.innerHTML = cumulativeText;
+				cumulativeGradeContainer.style.display = '';
+			}
+		} else if (cumulativeGradeContainer) {
+			cumulativeGradeContainer.remove(); 
+		}
+	}
+
 	// Process score element
 	function processScoreElement(scoreElement) {
 		if (scoreElement.hasAttribute('data-gs-discrete-processed')) {
@@ -78,7 +141,8 @@
 		const scoreDisplay = document.createElement('div');
 		scoreDisplay.className = 'gs-discrete-score-value';
 		scoreDisplay.textContent = scoreText; 
-		const button = createButton(shouldHide);
+		const toggleButton = createButton(shouldHide);
+		const dropButton = createDropButton();
 
 		if (shouldHide) {
 			scoreDisplay.classList.add('gs-discrete-hidden');
@@ -86,11 +150,12 @@
 
 		scoreElement.innerHTML = '';
 		wrapper.appendChild(scoreDisplay);
-		wrapper.appendChild(button);
+		wrapper.appendChild(toggleButton);
+		wrapper.appendChild(dropButton);
 		scoreElement.appendChild(wrapper);
 
 		// Click handler
-		button.addEventListener('click', (e) => {
+		toggleButton.addEventListener('click', (e) => {
 			e.preventDefault();
 			e.stopPropagation();
 	      
@@ -98,7 +163,26 @@
 			scoreDisplay.classList.toggle('gs-discrete-hidden');
 	      
 			const newHiddenState = !isCurrentlyHidden;
-			button.textContent = newHiddenState ? 'Show Grade' : 'Hide Grade';
+			toggleButton.textContent = newHiddenState ? 'Show Grade' : 'Hide Grade';
+		});
+
+		dropButton.addEventListener('click', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			const isDropped = wrapper.getAttribute('data-gs-discrete-dropped') === 'true';
+	
+			if (isDropped) {
+				wrapper.removeAttribute('data-gs-discrete-dropped');
+				scoreDisplay.classList.remove('gs-discrete-dropped');
+				dropButton.classList.remove('active');
+			} else {
+				wrapper.setAttribute('data-gs-discrete-dropped', 'true');
+				scoreDisplay.classList.add('gs-discrete-dropped');
+				dropButton.classList.add('active');
+			}
+			
+			recalculateTotals();
 		});
 	}
 
@@ -106,44 +190,11 @@
 	function processPage() {
 		const url = window.location.href;
 		if (url.match(/\/courses\/\d+$/)) {
+			// Process individual score elements for hiding/showing
 			const scoreElements = document.querySelectorAll('.submissionStatus--score');
-            
-            let totalEarned = 0;
-            let totalPossible = 0;
-            let gradedAssignmentsCount = 0;
-
-            scoreElements.forEach(scoreElement => {
-                const scoreText = scoreElement.textContent.trim();
-                // Skip ungraded assignments for cumulative calculation
-                if (!scoreText.match(/^-\s*\/\s*\d/)) {
-                    const scoreInfo = parseScore(scoreText);
-                    if (scoreInfo && scoreInfo.total > 0) {
-                        totalEarned += scoreInfo.earned;
-                        totalPossible += scoreInfo.total;
-                        gradedAssignmentsCount++;
-                    }
-                }
-            });
-
-            // Process individual score elements for hiding/showing
 			scoreElements.forEach(el => processScoreElement(el));
 
-            let cumulativeGradeContainer = document.querySelector('.gs-cumulative-grade');
-            if (settings.cumulative && totalPossible > 0) {
-                const cumulativePercentage = (totalEarned / totalPossible) * 100;
-                const cumulativeText = `Cumulative Grade: <span>${cumulativePercentage.toFixed(2)}%</span> (${totalEarned.toFixed(2)} / ${totalPossible.toFixed(2)})`;
-
-                if (!cumulativeGradeContainer) {
-                    const contentWrapper = document.querySelector('.l-content');
-                    cumulativeGradeContainer = document.createElement('div');
-                    cumulativeGradeContainer.className = 'gs-cumulative-grade';
-                    contentWrapper.appendChild(cumulativeGradeContainer);
-                }
-                cumulativeGradeContainer.innerHTML = cumulativeText;
-                cumulativeGradeContainer.style.display = '';
-            } else if (cumulativeGradeContainer) {
-                cumulativeGradeContainer.remove(); 
-            }
+			recalculateTotals();
 
 			if (settings.apparent) {
 	            const warns = document.querySelectorAll(`
